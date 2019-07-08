@@ -1,0 +1,19 @@
+version: '3.3'
+services:
+  db:
+    image: mongo
+    networks:
+      - searcher
+  mq:
+    image: rabbitmq
+    networks:
+      - searcher
+  vm:
+    image: ubuntu:16.04
+    command: "sleep 3600"
+    networks:
+      - searcher
+
+networks:
+  searcher:
+
