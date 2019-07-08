@@ -36,5 +36,18 @@ resource "google_compute_instance" "instance" {
     ssh-keys = "appuser:${file(var.public_key_path)}"
   }
 
+  connection {
+    type  = "ssh"
+    user  = "appuser"
+    agent = false
+
+    # путь до приватного ключа
+    private_key = "${file(var.private_key_path)}"
+  }
+
+  provisioner "remote-exec" {
+    inline = ["curl -fsSL https://get.docker.com -o get-docker.sh", "sudo sh get-docker.sh", "sudo usermod -aG docker $USER"]
+  }
+
 }
 
