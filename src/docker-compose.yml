@@ -5,12 +5,29 @@ services:
     networks:
       - searcher
   mq:
-    image: rabbitmq
+    image: "rabbitmq:3-management"
+    environment:
+      RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
+      RABBITMQ_DEFAULT_USER: "rabbitmq"
+      RABBITMQ_DEFAULT_PASS: "rabbitmq"
+      RABBITMQ_DEFAULT_VHOST: "/"
+      #    ports:
+      #      - "15672:15672"
+      #      - "5672:5672"
+    labels:
+      NAME: "rabbitmq1"
+    volumes:
+      - "./enabled_plugins:/etc/rabbitmq/enabled_plugins"
     networks:
       - searcher
   vm:
     image: ubuntu:16.04
     command: "sleep 3600"
+    environment:
+      MONGO: "db"
+      RMQ_HOST: "mq"
+      RMQ_USERNAME: "rabbitmq"
+      RMQ_PASSWORD: "rabbitmq"
     networks:
       - searcher
 
