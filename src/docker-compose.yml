@@ -21,7 +21,8 @@ services:
     networks:
       - searcher
   vm:
-    image: ubuntu:16.04
+    build: ./search_engine_crawler-master 
+    image: crowler:0.4
     command: "sleep 3600"
     environment:
       MONGO: "db"
