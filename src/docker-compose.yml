@@ -4,6 +4,7 @@ services:
     image: mongo
     networks:
       - searcher
+
   mq:
     image: "rabbitmq:3-management"
     environment:
@@ -20,13 +21,15 @@ services:
       #- "./enabled_plugins:/etc/rabbitmq/enabled_plugins"
     networks:
       - searcher
+
   crawler:
     build: ./search_engine_crawler-master 
-    image: crowler:0.4
-    command: sh -c "sleep 10 && python3 -u crawler/crawler.py https://vitkhab.github.io/search_engine_test_site/"
+    image: crowler:0.5
+    #command: sh -c "sleep 10 && python3 -u crawler/crawler.py https://vitkhab.github.io/search_engine_test_site/"
     depends_on:
       - db
       - mq
+    restart: on-failure
     #command: "sleep 10000"
     environment:
       MONGO: "db"
@@ -38,10 +41,11 @@ services:
       - "8000:8000"
     networks:
       - searcher
+
   ui:
     build: ./search_engine_ui-master
-    image: searcher-ui:0.1
-    command: "sleep 10000"
+    image: searcher-ui:0.2
+    #command: "sleep 10000"
     depends_on:
       - db
     environment:

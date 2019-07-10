@@ -10,3 +10,9 @@ RUN pip3 install -r requirements.txt
 
 ENV MONGO db
 
+ENV FLASK_APP ui.py
+
+WORKDIR /app/ui
+
+CMD ["gunicorn", "ui:app", "-b", "0.0.0.0"]
+

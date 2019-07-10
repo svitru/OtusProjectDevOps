@@ -13,3 +13,6 @@ ENV RMQ_HOST mq
 ENV RMQ_USERNAME rabbitmq
 ENV RMQ_PASSWORD rabbitmq
 
+ENV EXCLUDE_URLS .*github.com
+CMD ["python3", "-u", "crawler/crawler.py", "https://vitkhab.github.io/search_engine_test_site/"]
+
