@@ -16,14 +16,14 @@ services:
       #      - "5672:5672"
     labels:
       NAME: "rabbitmq1"
-      #    volumes:
-      #      - "./enabled_plugins:/etc/rabbitmq/enabled_plugins"
+   #volumes:
+      #- "./enabled_plugins:/etc/rabbitmq/enabled_plugins"
     networks:
       - searcher
-  vm:
+  crawler:
     build: ./search_engine_crawler-master 
     image: crowler:0.4
-    command: sh -c "python3 -u crawler/crawler.py https://vitkhab.github.io/search_engine_test_site/"
+    command: sh -c "sleep 10 && python3 -u crawler/crawler.py https://vitkhab.github.io/search_engine_test_site/"
     depends_on:
       - db
       - mq
