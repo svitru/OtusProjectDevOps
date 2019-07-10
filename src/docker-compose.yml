@@ -16,19 +16,26 @@ services:
       #      - "5672:5672"
     labels:
       NAME: "rabbitmq1"
-    volumes:
-      - "./enabled_plugins:/etc/rabbitmq/enabled_plugins"
+      #    volumes:
+      #      - "./enabled_plugins:/etc/rabbitmq/enabled_plugins"
     networks:
       - searcher
   vm:
     build: ./search_engine_crawler-master 
     image: crowler:0.4
-    command: "sleep 3600"
+    command: sh -c "python3 -u crawler/crawler.py https://vitkhab.github.io/search_engine_test_site/"
+    depends_on:
+      - db
+      - mq
+    #command: "sleep 10000"
     environment:
       MONGO: "db"
       RMQ_HOST: "mq"
       RMQ_USERNAME: "rabbitmq"
       RMQ_PASSWORD: "rabbitmq"
+      EXCLUDE_URLS: ".*github.com"
+    ports:
+      - "8000:8000"
     networks:
       - searcher
 
