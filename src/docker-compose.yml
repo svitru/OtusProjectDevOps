@@ -8,9 +8,9 @@ services:
   mq:
     image: "rabbitmq:3-management"
     environment:
-      RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
-      RABBITMQ_DEFAULT_USER: "rabbitmq"
-      RABBITMQ_DEFAULT_PASS: "rabbitmq"
+      #RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
+      RABBITMQ_DEFAULT_USER: ${RABBIT_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBIT_PASS}
       RABBITMQ_DEFAULT_VHOST: "/"
       #    ports:
       #      - "15672:15672"
@@ -24,7 +24,7 @@ services:
 
   crawler:
     build: ./search_engine_crawler-master 
-    image: crowler:0.5
+    image: crowler:${CRAWLER_VER}
     #command: sh -c "sleep 10 && python3 -u crawler/crawler.py https://vitkhab.github.io/search_engine_test_site/"
     depends_on:
       - db
@@ -34,8 +34,8 @@ services:
     environment:
       MONGO: "db"
       RMQ_HOST: "mq"
-      RMQ_USERNAME: "rabbitmq"
-      RMQ_PASSWORD: "rabbitmq"
+      RMQ_USERNAME: ${RABBIT_USER}
+      RMQ_PASSWORD: ${RABBIT_PASS}
       EXCLUDE_URLS: ".*github.com"
     ports:
       - "8000:8000"
@@ -44,7 +44,7 @@ services:
 
   ui:
     build: ./search_engine_ui-master
-    image: searcher-ui:0.2
+    image: searcher-ui:${UI_VER}
     #command: "sleep 10000"
     depends_on:
       - db
