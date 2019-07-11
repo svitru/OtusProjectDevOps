@@ -8,29 +8,19 @@ services:
   mq:
     image: "rabbitmq:3-management"
     environment:
-      #RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
       RABBITMQ_DEFAULT_USER: ${RABBIT_USER}
       RABBITMQ_DEFAULT_PASS: ${RABBIT_PASS}
       RABBITMQ_DEFAULT_VHOST: "/"
-      #    ports:
-      #      - "15672:15672"
-      #      - "5672:5672"
-    labels:
-      NAME: "rabbitmq1"
-   #volumes:
-      #- "./enabled_plugins:/etc/rabbitmq/enabled_plugins"
     networks:
       - searcher
 
   crawler:
     build: ./search_engine_crawler-master 
     image: crowler:${CRAWLER_VER}
-    #command: sh -c "sleep 10 && python3 -u crawler/crawler.py https://vitkhab.github.io/search_engine_test_site/"
     depends_on:
       - db
       - mq
     restart: on-failure
-    #command: "sleep 10000"
     environment:
       MONGO: "db"
       RMQ_HOST: "mq"
@@ -45,7 +35,6 @@ services:
   ui:
     build: ./search_engine_ui-master
     image: searcher-ui:${UI_VER}
-    #command: "sleep 10000"
     depends_on:
       - db
     environment:
