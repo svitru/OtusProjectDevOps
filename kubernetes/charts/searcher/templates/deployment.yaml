@@ -1,0 +1,32 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-{{ .Chart.Name }}
+  labels:
+    app: otus-project
+    component: searcher
+    release: {{ .Release.Name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: otus-project
+      component: searcher
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      name: searcher
+      labels:
+        app: otus-project
+        component: searcher
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+      - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        name: searcher
+        ports:
+        - containerPort: {{ .Values.service.internalPort }}
+          name: searcher
+          protocol: TCP
+

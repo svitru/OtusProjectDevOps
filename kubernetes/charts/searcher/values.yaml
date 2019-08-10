@@ -1,0 +1,8 @@
+---
+service:
+  internalPort: 8000
+
+image:
+  repository: svitru/otus-searcher
+  tag: 0.2
+
