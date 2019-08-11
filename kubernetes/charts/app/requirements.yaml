@@ -1,0 +1,14 @@
+dependencies:
+  - name: mongo
+    version: "1.0.0"
+    repository: "file://../mongo"
+  - name: rabbit
+    version: 1.0.0
+    repository: "file://../rabbitmq"
+  - name: crawler
+    version: 1.0.0
+    repository: "file://../crawler"
+  - name: searcher
+    version: 1.0.0
+    repository: "file://../searcher"
+

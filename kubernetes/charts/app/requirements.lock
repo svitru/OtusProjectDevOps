@@ -1,0 +1,15 @@
+dependencies:
+- name: mongo
+  repository: file://../mongo
+  version: 1.0.0
+- name: rabbit
+  repository: file://../rabbitmq
+  version: 1.0.0
+- name: crawler
+  repository: file://../crawler
+  version: 1.0.0
+- name: searcher
+  repository: file://../searcher
+  version: 1.0.0
+digest: sha256:0196ba3ca3959b473675210d4b820ba1280d1d3b38ce2859fa6c3e75a9c4a129
+generated: "2019-08-11T18:36:10.021407953+02:00"
