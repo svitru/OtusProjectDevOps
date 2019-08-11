@@ -4,6 +4,6 @@ service:
   externalPort: 8000
 
 image:
-  repository: svitru/otus-searcher
-  tag: 0.2
+  repository: svitru/otus-crowler
+  tag: 0.5
 

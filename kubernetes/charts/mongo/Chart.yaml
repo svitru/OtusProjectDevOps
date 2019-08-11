@@ -1,0 +1,9 @@
+---
+name: mongo
+version: 1.0.0
+description: OTUS searcher application component mongodb
+maintainers:
+  - name: svitru
+    email: sv@sv-it.ru
+appVersion: 1.0
+

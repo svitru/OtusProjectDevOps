@@ -1,0 +1,20 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "post.fullname" . }}
+  labels:
+    app: otus-project
+    component: searcher
+    release: {{ .Release.Name }}
+spec:
+  type: NodePort
+  ports:
+  - port: {{ .Values.service.externalPort }}
+    protocol: TCP
+    targetPort: {{ .Values.service.internalPort }}
+  selector:
+    app: otus-project
+    component: searcher
+    release: {{ .Release.Name }}
+

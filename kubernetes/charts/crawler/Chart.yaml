@@ -1,0 +1,9 @@
+---
+name: crawler
+version: 1.0.0
+description: OTUS crawler application
+maintainers:
+  - name: svitru
+    email: sv@sv-it.ru
+appVersion: 1.0
+

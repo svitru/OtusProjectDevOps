@@ -5,26 +5,26 @@ metadata:
   name: {{ .Release.Name }}-{{ .Chart.Name }}
   labels:
     app: otus-project
-    component: searcher
+    component: crawler
     release: {{ .Release.Name }}
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: otus-project
-      component: searcher
+      component: crawler
       release: {{ .Release.Name }}
   template:
     metadata:
-      name: searcher
+      name: crawler
       labels:
         app: otus-project
-        component: searcher
+        component: crawler
         release: {{ .Release.Name }}
     spec:
       containers:
       - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-        name: searcher
+        name: crawler
         ports:
         - containerPort: {{ .Values.service.internalPort }}
           name: searcher
@@ -32,4 +32,12 @@ spec:
         env:
         - name: MONGO
           value: "mongodb"
+        - name: RMQ_HOST
+          value: "rabbitmq"
+        - name: RMQ_USERNAME
+          value: "rabbitmq"
+        - name: RMQ_PASSWORD
+          value: "rabbitmq"
+        - name: EXCLUDE_URLS
+          value: ".*github.com"
 
