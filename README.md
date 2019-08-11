@@ -35,6 +35,12 @@
    - Произвести инициализацию **terraform**: ```terraform init```
    - Проанализировать изменения применяемых terraform'ом: ```terraform plan```
    - Создать кластер: ```terraform apply```
+ - Подключить кластер в качестве основного контекста **kubectl**: ```gcloud container clusters get-credentials my-gke-cluster --zone europe-west4-c --project %имя проекта%```
+ - Установить приложение в кластер из директории kubernetes/charts/:
+   - Произвести инициализацию **helm** установив серверную часть **tiller**: ```helm init```
+   - Установить приложение: ```helm install app/ --name app-1```
+ - Дождаться выдачу внешнего ip-адреса балансировщику searcher: ```kubectl get svc```
+ - Открыть в браузере <http://EXT-IP:8000>, где EXT-IP - внешний адрес присвоенный балансировщику
 
 ## Changelog:
  - Создание репозитория
