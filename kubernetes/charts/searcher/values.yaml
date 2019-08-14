@@ -7,3 +7,5 @@ image:
   repository: svitru/otus-searcher
   tag: 0.2
 
+baseDomain: 34-90-166-65.sslip.io
+
