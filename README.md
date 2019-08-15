@@ -47,6 +47,16 @@
    - baseIP: 34.90.166.65
    - legoEmail: sv@example.com
  - Из директории kubernetes/charts/gitlab-omnibus/ установить Gitlab средствами helm: ```helm install --name gitlab . -f values.yaml```
+ - Зайти на <https://gitlab.34-90-166-65.sslip.io>, зарегистрироваться, создать группу, проект (test)
+ - Создать удаленный репозиторий для kubernetes/charts/:
+   - ```cd kubernetes/charts/```
+   - ```git init```
+   - ```git remote add origin http://gitlab.34-90-166-65.sslip.io/svitru/test.git```
+   - ```git add .```
+   - ```git commit -m "Initial commit"```
+   - ```git push -u origin master```
+ - В корне репозитория kubernetes/charts/ находится файл **.gitlab-ci.yml**, который является файлом настроек pipeline для GitlabCi. При коммите репозитория срабатывает триггер на выполнение пайплайна для тестирования, сборки и деплоя приложения в окружение **staging** автоматически и в **production** по нажатию кнопки.
+ - Работу задеплоенного приложения можно проверить по ссылке <http://searcher.34-90-166-65.sslip.io>. Ingress приложения указывает на тот же балансировщик nginx, что и Gitlab, соответственно на тот же домен и ip, но используется поддомен **searcher.**
 
 ## Changelog:
  - Создание репозитория
