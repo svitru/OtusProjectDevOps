@@ -78,3 +78,4 @@
  - Развёртывание Gitlab из Helm chart'а, настройка проекта
  - Перенос репозитория charts в gitlab
  - Создание пайплайнов
+ - Отработанные пайплайны можно посмотреть по адресу <https://gitlab.34-90-166-65.sslip.io/svitru/searcher-deploy/pipelines>
