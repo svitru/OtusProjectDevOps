@@ -40,6 +40,14 @@
  - Дождаться выдачу внешнего ip-адреса балансировщику searcher: ```kubectl get svc app-1-searcher```
  - Открыть в браузере <http://EXT-IP:8000>, где EXT-IP - внешний адрес присвоенный балансировщику
 
+## GitlabCI в среде kubernetes:
+ - Выделить средствами GCP статический адрес регионального уровня
+ - В файл kubernetes/charts/gitlab-omnibus/values.yaml внести изменения для статического адреса и соответствующего ему домена:
+   - baseDomain: 34-90-166-65.sslip.io
+   - baseIP: 34.90.166.65
+   - legoEmail: sv@example.com
+ - Из директории kubernetes/charts/gitlab-omnibus/ установить Gitlab средствами helm: ```helm install --name gitlab . -f values.yaml```
+
 ## Changelog:
  - Создание репозитория
  - Создание манифестов terraform для тестовой среды GCP
